@@ -1,7 +1,3 @@
--- ============================================
--- Supabase Setup for Smart Bookmarks (Markly)
--- Run this in your Supabase SQL Editor
--- ============================================
 
 -- 1. Create the bookmarks table
 CREATE TABLE public.bookmarks (
@@ -33,3 +29,6 @@ CREATE POLICY "Users can delete their own bookmarks"
 
 -- 5. Enable Realtime for the bookmarks table
 ALTER PUBLICATION supabase_realtime ADD TABLE public.bookmarks;
+
+-- 6. Required for Realtime DELETE events to include full row data
+ALTER TABLE bookmarks REPLICA IDENTITY FULL;
